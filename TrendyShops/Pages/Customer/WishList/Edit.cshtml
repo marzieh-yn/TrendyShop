@@ -1,0 +1,53 @@
+﻿@page
+@model TrendyShops.Pages.Customer.WishList.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Wish_List</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Wish_List.Id" />
+            <div class="form-group">
+                <label asp-for="Wish_List.ProductId" class="control-label"></label>
+                <select asp-for="Wish_List.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="Wish_List.ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wish_List.UserId" class="control-label"></label>
+                <select asp-for="Wish_List.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="Wish_List.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Wish_List.Status" /> @Html.DisplayNameFor(model => model.Wish_List.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wish_List.Created_Date" class="control-label"></label>
+                <input asp-for="Wish_List.Created_Date" class="form-control" />
+                <span asp-validation-for="Wish_List.Created_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,76 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ProCatSub.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>ProCatSub</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProCatSub.ProductId" class="control-label"></label>
+                <select asp-for="ProCatSub.ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>
+            </div>
+            <div class="form-group">           
+                    <label asp-for="ProCatSub.Sub_CategoryId" class="control-label"> SubCategory</label>
+                <select asp-for="ProCatSub.Sub_CategoryId" class ="form-control" id="Subcategory">
+                    <option selected>Open this select menu</option>
+                    @foreach(var item in Model.Sub_Category)
+                { 
+                    <option value="@item.Id"> @item.Category.Name -> @item.Name</option>
+    
+                }
+                </select>                                         
+                </div>
+          
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProCatSub.Status" /> @Html.DisplayNameFor(model => model.ProCatSub.Status)
+                    </label>
+                </div>
+            </div>
+            <div>
+           
+                
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   
+}
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script>
+     $(document).ready(function () {
+          
+                      
+
+    $("#category").change(function () {
+     
+
+        var val = $(this).val();
+      
+        if (val == Sub_Category.CategoryId) {
+            $("#Subcategory").html("<option><%= Sub_Category.Category %></option>");
+        } 
+    });
+});
+    </script>*@
+    

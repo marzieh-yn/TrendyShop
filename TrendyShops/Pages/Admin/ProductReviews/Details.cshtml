@@ -1,0 +1,56 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ProductReviews.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductReviews</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.ReviewDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.ReviewDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Created_Date)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ProductReviews.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

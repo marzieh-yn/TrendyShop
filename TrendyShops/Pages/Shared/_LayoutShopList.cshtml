@@ -1,0 +1,310 @@
+﻿
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+    <title>@ViewData["Title"] - TrendyShop</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta content="Metronic Shop UI description" name="description">
+  <meta content="Metronic Shop UI keywords" name="keywords">
+  <meta content="keenthemes" name="author">
+
+  <meta property="og:site_name" content="-CUSTOMER VALUE-">
+  <meta property="og:title" content="-CUSTOMER VALUE-">
+  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+  <meta property="og:url" content="-CUSTOMER VALUE-">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+
+
+  <!-- Global styles START -->          
+  <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link href="~/assets/pages/css/animate.css" rel="stylesheet">
+  <link href="~/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="~/assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <!-- Page level plugin styles END -->
+   <!-- Toastr -->
+  <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <!-- Theme styles START -->
+  <link href="~/assets/pages/css/components.css" rel="stylesheet">
+  <link href="~/assets/pages/css/slider.css" rel="stylesheet">
+  <link href="~/assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="~/assets/corporate/css/style.css" rel="stylesheet">
+  <link href="~/assets/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="~/assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="~/assets/corporate/css/custom.css" rel="stylesheet">
+  <!-- Theme styles END -->
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN TOP BAR MENU -->
+                <div class="col-md-12 additional-nav">
+                    <ul class="list-unstyled list-inline pull-right">                      
+                        <partial name="_LoginPartial"/>
+                    </ul>
+                </div>
+                <!-- END TOP BAR MENU -->
+            </div>
+        </div>
+    </div>
+    <!-- END TOP BAR -->
+    <!-- BEGIN HEADER -->
+    <div class="header">
+        <div class="container">
+            <a class="site-logo" href="/Index"><img src="~/assets/corporate/img/logos/Logo5.png" alt="Metronic Shop UI"></a>
+
+            <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+            <!-- BEGIN CART -->
+            <div class="top-cart-block">
+                <div class="top-cart-info">
+                    <a asp-page="/Customer/Cart/Index" class="top-cart-info-count">@ViewData["Count"] items</a>
+                    @*<a href="javascript:void(0);" class="top-cart-info-value">$1260</a>*@
+                </div>
+                    <i class="fa fa-shopping-cart"></i>
+            @if(Model.ShoppingCarts.Count != 0){                          
+                <div class="top-cart-content-wrapper">
+                    <div class="top-cart-content">
+                        <ul class="scroller" style="height: 250px;">
+                            @foreach (var item in Model.ShoppingCarts)
+                            {
+                                 <li>
+                                <a asp-page="Customer/ShopItem" asp-route-id="@item.Product.Id"><img src="@item.Product.Image" alt="Rolex Classic Watch" width="37" height="34"></a>
+                                <span class="cart-content-count">x @item.Count</span>
+                                <strong><a asp-page="Customer/ShopItem" asp-route-id="@item.Product.Id">@item.Product.Name</a></strong>
+                                <em>$@item.Product.CurrnetPrice</em>
+                                @*<a href="javascript:void(0);" class="del-goods">&nbsp;</a>*@
+                            </li> 
+                           }
+                            
+                        </ul>
+                        <div class="text-right">
+                            <a asp-page="/Customer/Cart/Index" class="btn btn-default">View Cart</a>
+                            <a asp-page="/Customer/Cart/CheckOut"  class="btn btn-primary">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <!--END CART -->
+            <!-- BEGIN NAVIGATION -->
+            <div class="header-navigation">
+                <ul>
+                    @foreach (var item in Model.Category) {
+                     @if (item.Status == true)
+                     {
+                          <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                            @item.Name  
+
+                        </a>
+
+                        <!-- BEGIN DROPDOWN MENU -->
+                        <ul class="dropdown-menu">
+                              @foreach (var items in Model.Sub_Category) {
+                                 @if (items.Status == true && items.CategoryId == item.Id)
+                                 {
+                            <li><a asp-page="/Customer/ProductList" asp-route-id="@items.Id">@items.Name</a></li>
+                               }
+                             }
+                        </ul>
+                        <!-- END DROPDOWN MENU -->
+                    </li>
+                       
+                     }
+                 }
+                    <!-- BEGIN TOP SEARCH -->
+                    <li class="menu-search">
+                        <span class="sep"></span>
+                        <i class="fa fa-search search-btn"></i>
+                        <div class="search-box">
+                            <form action="get">
+                                <div class="input-group">
+                                  <input type="text" placeholder="Search" name="SearchString"  class="form-control">
+                                  <span class="input-group-btn">
+                                    <button  asp-page="./SearchResult"  class="btn btn-primary" type="submit">Search</button>
+                                  </span>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <!-- END TOP SEARCH -->
+                </ul>
+            </div>
+            <!-- END NAVIGATION -->
+        </div>
+    </div>
+    <!-- Header END -->
+
+    <div class="main">
+        <div class="container">
+            
+                @RenderBody()
+           
+
+        </div>
+    </div>
+
+
+    <!-- BEGIN STEPS -->
+    <div class="steps-block steps-block-red">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-truck"></i>
+                    <div>
+                        <h2>Free shipping</h2>
+                        <em>Express delivery withing 3 days</em>
+                    </div>
+                    <span>&nbsp;</span>
+                </div>
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-gift"></i>
+                    <div>
+                        <h2>Daily Gifts</h2>
+                        <em>3 Gifts daily for lucky customers</em>
+                    </div>
+                    <span>&nbsp;</span>
+                </div>
+                <div class="col-md-4 steps-block-col">
+                    <i class="fa fa-phone"></i>
+                    <div>
+                        <h2>
+                            Demo
+                        </h2>
+                        <em>24/7 customer care available</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END STEPS -->
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN BOTTOM ABOUT BLOCK -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>About us</h2>
+                    <p>This is a demo website.</p>
+                </div>
+                <!-- END BOTTOM ABOUT BLOCK -->
+                <!-- BEGIN BOTTOM INFO BLOCK -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>Information</h2>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right"></i> <a href="/ContactUs">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- END INFO BLOCK -->
+               
+                <!-- BEGIN BOTTOM CONTACTS -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>Our Contacts</h2>
+                    <address class="margin-bottom-40">
+                        <br>                  
+                        Phone: 236 888 4656<br>
+                        Email: <a href="mailto:marzie.yahyanezhad@gmail.com">marzie.yahyanezhad@gmail.com</a><br>
+                    </address>
+                </div>
+                <!-- END BOTTOM CONTACTS -->
+            </div>
+         
+        </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN COPYRIGHT -->
+                <div class="col-md-4 col-sm-4 padding-top-10">
+                    2022 © Marzieh Yn. ALL Rights Reserved.
+                </div>
+                <!-- END COPYRIGHT -->
+                
+                <!-- BEGIN POWERED -->
+                <div class="col-md-4 col-sm-4 text-right">
+                    <p class="powered">Powered by: <a href="http://">Marzieh Yahyanezhad</a></p>
+                </div>
+                <!-- END POWERED -->
+            </div>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+   
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>
+      <![endif]-->  
+    <script src="~/assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="~/assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='~/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="~/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="~/assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='~/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="~/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <script src="~/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+    <script src="~/assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
+    <script src="~/assets/pages/scripts/contact-us.js" type="text/javascript"></script>
+    <script src="~/assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/assets/pages/scripts/bs-carousel.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            Layout.init();
+            Layout.initOWL();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initTwitter();
+            Layout.initUniform();
+            Layout.initFixHeaderWithPreHeader();
+            Layout.initNavScrolling();
+        });
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+  @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+<!-- END BODY -->
+</html>

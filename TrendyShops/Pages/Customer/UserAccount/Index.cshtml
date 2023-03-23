@@ -1,0 +1,40 @@
+﻿@page
+@model TrendyShops.Pages.Customer.UserAccount.IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+          Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+          ViewData["Title"] = "User Account";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="breadcrumb">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a>Account</a></li>
+            <li class="active">User Account</li>
+        </ul>
+    <!-- BEGIN CONTENT -->
+    <div class="col-md-9 col-sm-7" style="  margin-top: 2%;  margin-bottom: 5%;">
+        <h2>Welcome @UserManager.GetUserName(User)</h2>
+        <div class="content-page">
+            <h3>My Account</h3>
+            <ul>
+                <li><a href="~/Identity/Account/Manage/Index">Edit your account information</a></li>
+                <li><a href="~/Identity/Account/Manage/ChangePassword">Change your password</a></li>
+                <li><a href="UserAddress/Index">Modify your address book entries</a></li>
+                @*<li><a href="javascript:;">Modify your wish list</a></li>*@
+            </ul>
+            <hr>
+            <h3>My Orders</h3>
+            <ul>
+                <li><a href="Cart/OrderHistory">View your order history</a></li>
+                @*<li><a href="javascript:;">Downloads</a></li>*@
+                @*<li><a href="javascript:;">Your Reward Points</a></li>*@
+                @*<li><a href="javascript:;">View your return requests</a></li>*@
+                @*<li><a href="javascript:;">Your Transactions</a></li>*@
+            </ul>
+        </div>
+    </div>
+    <!-- END CONTENT -->
+}

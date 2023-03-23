@@ -1,0 +1,21 @@
+
+{
+    "region" : "ca-central-1",
+    "configuration" : "Debug",
+    "framework"     : "net6.0",
+    "self-contained" : true,
+    "application"    : "TrendyShop",
+    "environment"    : "Trendyshop-env",
+    "app-path"       : "/",
+    "iis-website"    : "Default Web Site",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "",
+    "solution-stack"       : "64bit Windows Server Core 2019 v2.10.7 running IIS 10.0",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "trendyshops-dev",
+    "instance-type"        : "t1.micro",
+    "key-pair"             : "",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role"
+}

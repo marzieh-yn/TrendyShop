@@ -1,0 +1,152 @@
+﻿@page "{searchString?}"
+@using TrendyShops.Model
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@model TrendyShops.Pages.Customer.SearchResultModel
+@{
+    Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+    ViewData["Title"] = "Search Product";
+}
+ <ul class="breadcrumb">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a href="">Store</a></li>
+            <li class="active">Search Result</li>
+ </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-5">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+               @foreach (var item in Model.Category) {
+                     @if (item.Status == true)
+                     {
+                        <li class="list-group-item clearfix dropdown">
+                            <a href="shop-product-list.html">
+                                <i class="fa fa-angle-right"></i>
+                                    @Html.DisplayFor(modelItem => item.Name)                  
+                            </a>
+                             @foreach (var items in Model.Sub_Category) {
+                                 @if (items.Status == true && items.CategoryId == item.Id)
+                                 {
+                             <ul class="dropdown-menu">                 
+                                      <li><a asp-page="/Customer/ProductList" asp-route-id="@items.Id"><i class="fa fa-angle-right"></i>  @Html.DisplayFor(modelItem => items.Name)       </a></li>
+                              </ul>
+                                 }
+                             }
+                         </li>
+                     }
+                 }
+            </ul>
+
+
+            <div class="sidebar-products clearfix">
+              <h2>Bestsellers</h2>
+               @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.BestSeller == true)
+                {
+              <div class="item">
+                <a asp-page="./ShopItem" asp-route-id="@items.Product.Id"><img src="@items.Product.Image" alt=""></a>
+                <h3><a asp-page="./ShopItem" asp-route-id="@items.Product.Id">@items.Product.Name</a></h3>
+                <div class="price">$@items.Product.CurrnetPrice</div>
+              </div>
+             }
+                }
+
+            </div>
+          </div>
+          <!-- END SIDEBAR -->
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7">
+ <!-- BEGIN CONTENT -->
+          <div class="col-md-10 col-sm-8" style=" width: 103%;">
+            <div class="content-search margin-bottom-20">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Search result for <em>shoes</em></h1>
+                </div>
+                <div class="col-md-6">
+                  <form action="get">
+                    <div class="input-group">
+                      <input type="text" placeholder="Search again" name="SearchString"  asp-for="SearchString" class="form-control">
+                      @*<input type="submit" value="Search" />*@
+                      <span class="input-group-btn">
+                        <button  asp-page="/SearchResult/Search" asp-page-handler="Search" class="btn btn-primary" type="submit">Search</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="row list-view-sorting clearfix">
+              <div class="col-md-2 col-sm-2 list-view">
+                <a href="javascript:;"><i class="fa fa-th-large"></i></a>
+                <a href="javascript:;"><i class="fa fa-th-list"></i></a>
+              </div>
+              <div class="col-md-10 col-sm-10">
+                
+               @* <div class="pull-right">
+                  <label class="control-label">Sort&nbsp;By:</label>
+                  <select class="form-control input-sm">
+                    <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
+                    <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
+                    <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
+                    <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
+                    <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
+                    <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
+                    <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
+                    <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
+                    <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                  </select>
+                </div>*@
+              </div>
+            </div>
+            <!-- BEGIN PRODUCT LIST -->
+            <div class="row product-list">
+                 @if(Model.Products != null){
+               @foreach (var items in Model.Products) {
+                         @if (items.Status == true)
+                {
+                <!-- PRODUCT ITEM START -->
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img src="@items.Image" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="@items.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="./ShopItem" asp-route-id="@items.Id" class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="./ShopItem" asp-route-id="@items.Id" >@items.Name</a></h3>
+                  <div class="pi-price">$@items.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div>
+              </div>
+              <!-- PRODUCT ITEM END -->
+               }
+                }
+                }
+             
+            </div>
+            <!-- END PRODUCT LIST -->
+            <!-- BEGIN PAGINATOR -->
+           @* <div class="row">
+              <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
+              <div class="col-md-8 col-sm-8">
+                <ul class="pagination pull-right">
+                  <li><a href="javascript:;">&laquo;</a></li>
+                  <li><a href="javascript:;">1</a></li>
+                  <li><span>2</span></li>
+                  <li><a href="javascript:;">3</a></li>
+                  <li><a href="javascript:;">4</a></li>
+                  <li><a href="javascript:;">5</a></li>
+                  <li><a href="javascript:;">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>*@
+            <!-- END PAGINATOR -->
+          </div>
+          <!-- END CONTENT -->
+            </div>
+          <!-- END CONTENT -->
+        
+        <!-- END SIDEBAR & CONTENT -->

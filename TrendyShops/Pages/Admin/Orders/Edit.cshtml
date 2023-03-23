@@ -1,0 +1,62 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Orders.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>ShoppingCart</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderDetail.Id" />
+            <div class="form-group">
+                <label asp-for="OrderDetail.ProductId" class="control-label"></label>
+                <select asp-for="OrderDetail.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="OrderDetail.ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDetail.ProductSizeId" class="control-label"></label>
+                <select asp-for="OrderDetail.ProductSizeId" class="form-control" asp-items="ViewBag.ProductSizesId"></select>
+                <span asp-validation-for="OrderDetail.ProductSizeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDetail.ProductColorId" class="control-label"></label>
+                <select asp-for="OrderDetail.ProductColorId" class="form-control" asp-items="ViewBag.ProductColorsId"></select>
+                <span asp-validation-for="OrderDetail.ProductColorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDetail.Count" class="control-label"></label>
+                <input asp-for="OrderDetail.Count" class="form-control" />
+                <span asp-validation-for="OrderDetail.Count" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="ShoppingCart.ApplicationUserId" class="control-label"></label>
+                <input asp-for="ShoppingCart.ApplicationUserId" class="form-control" />
+               
+                <span asp-validation-for="ShoppingCart.ApplicationUserId" class="text-danger"></span>
+            </div>*@
+           @* <div class="form-group">
+                <label asp-for="OrderDetail.Created_Date" class="control-label"></label>
+                <input asp-for="OrderDetail.Created_Date" class="form-control" />
+                <span asp-validation-for="OrderDetail.Created_Date" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

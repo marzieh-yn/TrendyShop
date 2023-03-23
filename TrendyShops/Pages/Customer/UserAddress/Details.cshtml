@@ -1,0 +1,60 @@
+﻿@page
+@model TrendyShops.Pages.Customer.UserAddress.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+}
+<ul class="breadcrumb">
+   <li><a asp-page="/Index">Home</a></li>
+   <li><a href="">User</a></li>
+   <li class="active">User Address</li>
+</ul>
+<h2>Details</h2>
+
+<div>
+    <h4>User_Address</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.PostalCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.PostalCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.ExtraDetailes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.ExtraDetailes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User_Address.Created_Date)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.User_Address.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

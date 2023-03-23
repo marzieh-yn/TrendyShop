@@ -1,0 +1,48 @@
+﻿@page
+@model TrendyShops.Pages.Admin.SubCategory.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Sub_Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Sub_Category.Id" />
+            <div class="form-group">
+                <label asp-for="Sub_Category.Name" class="control-label"></label>
+                <input asp-for="Sub_Category.Name" class="form-control" />
+                <span asp-validation-for="Sub_Category.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sub_Category.CategoryId" class="control-label"></label>
+                <select asp-for="Sub_Category.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="Sub_Category.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Sub_Category.Status" /> @Html.DisplayNameFor(model => model.Sub_Category.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,125 @@
+﻿@page
+@using TrendyShops.Model
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@model TrendyShops.Pages.Customer.Cart.IndexModel
+@{
+        Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+    ViewData["Title"] = "Shopping Cart";
+}
+<ul class="breadcrumb">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a>Cart</a></li>
+            <li class="active">Shopping Cart</li>
+        </ul>
+ <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <h1>Shopping cart</h1>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table summary="Shopping cart">
+                  <tr>
+                    <th class="goods-page-image">Image</th>
+                    <th class="goods-page-description">Description</th>
+                    <th class="goods-page-quantity" >Quantity</th>
+                    <th class="goods-page-price" colspan="2">Unit price</th>
+                    @*<th class="goods-page-total" colspan="2">Total</th>*@
+                  </tr>
+                  
+                       @foreach (var item in Model.ShoppingCart) {
+                   <tr>
+                    <td class="goods-page-image">
+                      <a href="javascript:;"><img src="@item.Product.Image" alt="Berry Lace Dress"></a>
+                    </td>
+                    <td class="goods-page-description">
+                      <h3> @Html.Raw(@item.Product.Short_description)</h3>
+                      <p><strong>@item.Product.Name</strong> - Color: @item.ProductColors.Color; Size: @item.ProductSizes.Size</p>
+                      
+                    </td>
+                   
+                    <td class="goods-page-quantity">
+       
+							 <form method="post">
+                               <div> @item.Count
+                                    <input type="submit" value="+" asp-page-handler="Plus" asp-route-cartId="@item.Id"/>
+
+                               
+                                 <input type="submit" value="-" asp-page-handler="Minus" asp-route-cartId="@item.Id"/></div>
+                            </form>
+                    
+                    </td>
+                    <td class="goods-page-price">
+                      <strong><span>$</span>@item.Product.CurrnetPrice</strong>
+                    </td>
+                   @* <td class="goods-page-total">
+                      <strong><span>$</span>@Model.CurrentPrices.ToString("0.00")</strong>
+                    </td>*@
+                    <td class="del-goods-col">
+                         <form method="post">
+                                <div>
+                                    <input  class="del-goods" type="submit" value="&nbsp;" asp-page-handler="Remove" asp-route-cartId="@item.Id"/>
+                                </div>
+                            </form>
+                    </td>
+                  </tr>
+                  }
+                 
+                </table>
+                </div>
+
+                <div class="shopping-total">
+                  <ul>
+                    <li>
+                      <em>Sub total</em>
+                      <strong class="price"><span>$</span>@Model.CartTotal.ToString("0.00")</strong>
+                    </li>
+                    <li>
+                      <em>Shipping cost</em>
+                      <strong class="price"><span>$</span>5.00</strong>
+                    </li>
+                    <li class="shopping-total-price">
+                      <em>Total</em>
+                      <strong class="price"><span>$</span>@Model.FinalPrice.ToString("0.00")</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a asp-page="/Index" class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></a>
+              <a asp-page="/Customer/Cart/CheckOut" class="btn btn-primary" >Checkout <i class="fa fa-check"></i></a>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <div class="row margin-bottom-40">
+          <div class="col-md-12 col-sm-12">
+            <h2>Most popular products</h2>
+            <div class="owl-carousel owl-carousel4">
+               @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.ThreeItems == true)
+                {
+                 <div>
+                 <div class="product-item">
+                     <div class="pi-img-wrapper">               
+                    <img src="@items.Product.Image" class="img-responsive" alt="Berry Lace Dress" style=" height: 240px;  ">
+                    <div>
+                      <a href="@items.Product.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id"  class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id" >@items.Product.Name</a></h3>
+                  <div class="pi-price">$@items.Product.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div>
+                 </div>
+                }
+                }
+              
+            </div>
+          </div>
+        </div>
+        <!-- END SIMILAR PRODUCTS -->

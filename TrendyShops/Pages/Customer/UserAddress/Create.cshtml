@@ -1,0 +1,66 @@
+﻿@page
+@model TrendyShops.Pages.Customer.UserAddress.CreateModel
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using TrendyShops.Utility
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager 
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+    string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+}
+<ul class="breadcrumb">
+   <li><a asp-page="/Index">Home</a></li>
+   <li><a href="">User</a></li>
+   <li class="active">User Address</li>
+</ul>
+<div class="row"  style="  margin-top: 2%;  margin-bottom: 5%;">
+    <div class="col-md-6">
+        
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="User_Address.UserId" hidden value="@userId" />
+          @*  @foreach (var item in Model.ShoppingCarts){
+             <div class="form-group" >
+                    <label asp-for="User_Address.UserId" class="control-label" >UserId</label>
+                  <input asp-for="User_Address.UserId" type="text" class="form-control" id="UserId"  value="@item.ApplicationUserId">
+            </div>
+                                    }*@
+            
+            <div class="form-group">
+                <label asp-for="User_Address.Address" class="control-label"></label>
+                <input asp-for="User_Address.Address" class="form-control" />
+                <span asp-validation-for="User_Address.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_Address.PostalCode" class="control-label"></label>
+                <input asp-for="User_Address.PostalCode" class="form-control" />
+                <span asp-validation-for="User_Address.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_Address.ExtraDetailes" class="control-label"></label>
+                <input asp-for="User_Address.ExtraDetailes" class="form-control" />
+                <span asp-validation-for="User_Address.ExtraDetailes" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group" hidden>
+                    <label asp-for="User_Address.Created_Date" class="control-label" hidden>Created_Date</label>
+                  <input asp-for="User_Address.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+            </div>
+          
+            <div class="form-group">
+                <button  type="submit" class="btn btn-default" >Create</button>
+            </div>
+                                    
+        </form>
+    </div>
+</div>
+
+<div style="  margin-top: 2%;  margin-bottom: 5%;">
+    <button class="btn btn-primary" asp-page="Index">Back</button>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

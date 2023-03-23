@@ -1,0 +1,98 @@
+﻿@page
+@model TrendyShops.Pages.Customer.UserAddress.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+}
+
+<ul class="breadcrumb">
+   <li><a asp-page="/Index">Home</a></li>
+   <li><a href="">User</a></li>
+   <li class="active">User Address</li>
+</ul>
+		<div class="row margin-bottom-40">
+			 <div class="col-md-12 col-sm-12">
+				 <div class="panel-group checkout-page accordion " id="checkout-page">              
+					  <!-- BEGIN SHIPPING ADDRESS -->
+					  <div id="shipping-address" class="panel panel-default">                                
+						<div class="panel-body row">
+							<br />
+									<div class="backgroundWhiteBorder">
+										@*<div class="container">*@
+												<a asp-page="Create" class="btn">Create New</a>		                
+												<div class="card">												
+													<table id="example1" class="table table-bordered table-striped">
+
+                                                        <thead>
+                                                            <tr>
+                                                                
+                                                                <th>
+                                                                    Address
+                                                                </th>
+                                                                <th>
+                                                                    PostalCode
+                                                                </th>
+                                                                <th>
+                                                                    ExtraDetailes
+                                                                </th>
+                                                                @*<th>
+                                                                   Status
+                                                                </th>*@
+                                                                <th>
+                                                                    Created_Date
+                                                                </th>
+                            
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                    @foreach (var item in Model.User_Address) {
+                                                            <tr>
+                                                                @*<td>
+                                                                    @Html.DisplayFor(modelItem => item.Id)
+                                                                </td>*@
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Address)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.PostalCode)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ExtraDetailes)
+                                                                </td>
+                                                                @*<td>
+                                                                    @Html.DisplayFor(modelItem => item.Status)
+                                                                </td>*@
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Created_Date)
+                                                                </td>
+                                                                <td>
+                                                                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                                                    @*<a asp-page="./Details" asp-route-id="@item.Id">Details</a> |*@
+                                                                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                    }
+                                                        </tbody>
+                                                    </table>
+												@*</div>*@
+											
+										</div>
+									</div>								
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	@{
+		 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+		 <script src="https://js.stripe.com/v3/"></script>
+	}
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+

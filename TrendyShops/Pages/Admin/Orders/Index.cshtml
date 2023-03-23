@@ -1,0 +1,101 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Orders.IndexModel
+@using TrendyShops.Model
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Index</h2>
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <!-- /.card -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Orders</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OrderDetail[0].Product)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OrderDetail[0].ProductSizes)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OrderDetail[0].ProductColors)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OrderDetail[0].Count)
+                                </th>
+                                <th>
+                                    Product Price
+                                </th>
+                                <th>
+                                   Order Id
+                                </th>
+                                 <th>Status</th>
+                                 <th>Order Date</th>
+                                @*<th>Action</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach (var item in Model.OrderDetail) {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                     @foreach (var sizes in Model.ProductSizes) {
+                                          @if(sizes.Id == item.ProductSizeId){
+                                    @Html.DisplayFor(modelItem => sizes.Size)
+                                     }}
+                                </td>
+                                <td>
+                                     @foreach (var colors in Model.ProductColors) {
+                                         @if(colors.Id == item.ProductColorId){
+                                     @Html.DisplayFor(modelItem => colors.Color)
+                                     }}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductPrice)
+
+                                 </td>
+                                <td>
+                                    <a asp-page="./ManageOrders/DetailsOrder" asp-route-id="@item.OrderId">@Html.DisplayFor(modelItem => item.OrderId)</a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderHeader.Status)</td>
+                                
+                                <td>@Html.DisplayFor(modelItem => item.OrderHeader.OrderDate)</td>
+                                @*<td>*@
+                                @*    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |*@
+                                    @*<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                                @*</td>*@
+                            </tr>
+                    }
+                        </tbody>
+                    </table>
+                </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->

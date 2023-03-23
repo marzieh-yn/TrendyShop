@@ -1,0 +1,60 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Orders.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShoppingCart</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Product.Name)
+    
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ProductSizes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.ProductSizes.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ProductColors)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.ProductColors.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Count)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Count)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ApplicationUserId)
+        </dt>
+        <dd>
+             @foreach (var item in Model.model) {
+            @item.Email;
+             }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Created_Date)
+        </dd>
+       
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ShoppingCart.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,61 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Category.DeleteModel
+
+@{
+        Layout = "~/Pages/Shared/_Layout2.cshtml";
+        ViewData["Title"] = "Delete";
+}
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+ <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>@Html.DisplayNameFor(model => model.Category.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Category.Status)</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                      
+                        <tr>
+                            <td>
+                            @Html.DisplayFor(model => model.Category.Id)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(model => model.Category.Name)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(model => model.Category.Status)
+                            </td>
+                            
+                        </tr>
+                        
+                  
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                      <th>#</th>
+                    <th>@Html.DisplayNameFor(model => model.Category.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Category.Status)</th>
+                    
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+<div>
+ 
+    
+    <form method="post">
+        <input type="hidden" asp-for="Category.Id" />
+      
+            <button type="submit" class="btn btn-danger">Delete</button>
+      
+       
+        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

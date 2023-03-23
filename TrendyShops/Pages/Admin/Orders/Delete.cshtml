@@ -1,0 +1,59 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Orders.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ShoppingCart</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ProductSizes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.ProductSizes.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ProductColors)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.ProductColors.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Count)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Count)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.ApplicationUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.ApplicationUser.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.Created_Date)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ShoppingCart.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

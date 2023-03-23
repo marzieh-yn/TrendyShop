@@ -1,0 +1,56 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ContactUs.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ContactUs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Message)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Message)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Phone_number)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Phone_number)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactUs.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactUs.Created_Date)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ContactUs.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

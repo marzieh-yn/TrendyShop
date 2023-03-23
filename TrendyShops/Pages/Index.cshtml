@@ -1,0 +1,181 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home Page";
+
+
+}
+@if (TempData["success"]!= null)
+{
+        <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+        <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="plugins/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["success"]')
+    </script>
+}
+@if (TempData["error"]!= null)
+{
+        <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+        <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="plugins/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.error('@TempData["error"]')
+    </script>
+}
+   
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SALE PRODUCT -->
+          <div class="col-md-12 sale-product">
+            <h2>New Arrivals</h2>
+            <div class="owl-carousel owl-carousel5">
+              
+             
+               @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.NewArrival == true)
+                {
+                 <div>
+                 <div class="product-item">
+                     <div class="pi-img-wrapper">               
+                    <img src="@items.Product.Image" class="img-responsive" >
+                    <div>
+                      <a href="@items.Product.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id"  class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id" >@items.Product.Name</a></h3>
+                  <div class="pi-price">$@items.Product.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div>
+                 </div>
+                }
+                }
+
+            </div>
+          </div>
+          <!-- END SALE PRODUCT -->
+        </div>
+        <!-- END SALE PRODUCT & NEW ARRIVALS -->
+         
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40 ">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-4">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+                 @foreach (var item in Model.Category) {
+                     @if (item.Status == true)
+                     {
+                        <li class="list-group-item clearfix dropdown">
+                            <a href="shop-product-list.html">
+                                <i class="fa fa-angle-right"></i>
+                                    @Html.DisplayFor(modelItem => item.Name)                  
+                            </a>
+                             @foreach (var items in Model.Sub_Category) {
+                                 @if (items.Status == true && items.CategoryId == item.Id)
+                                 {
+                             <ul class="dropdown-menu">                 
+                                      <li><a asp-page="/Customer/ProductList" asp-route-id="@items.Id"><i class="fa fa-angle-right"></i>  @Html.DisplayFor(modelItem => items.Name)       </a></li>
+                              </ul>
+                                 }
+                             }
+                         </li>
+                     }
+                 }
+              
+                </ul>
+          </div>
+          <!-- END SIDEBAR -->
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-8">
+            <h2>Most Popular Products</h2>
+            <div class="owl-carousel owl-carousel3">
+                             
+                 @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.ThreeItems == true)
+                {
+                 <div>
+                 <div class="product-item">
+                     <div class="pi-img-wrapper">               
+                    <img src="@items.Product.Image" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="@items.Product.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id"  class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id" >@items.Product.Name</a></h3>
+                  <div class="pi-price">$@items.Product.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div>
+                 </div>
+                }
+                }
+            
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN TWO PRODUCTS & PROMO -->
+        <div class="row margin-bottom-35 ">
+          <!-- BEGIN TWO PRODUCTS -->
+          <div class="col-md-6 two-items-bottom-items">
+            <h2>Best Seller</h2>
+            <div class="owl-carousel owl-carousel2">
+               @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.BestSeller == true)
+                {
+                 <div>
+                 <div class="product-item">
+                     <div class="pi-img-wrapper">               
+                    <img src="@items.Product.Image" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="@items.Product.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id"  class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id" >@items.Product.Name</a></h3>
+                  <div class="pi-price">$@items.Product.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div><div class="sticker sticker-sale"></div>
+                 </div>
+                }
+                }
+             </div>
+           </div>
+
+             
+          <!-- END TWO PRODUCTS -->
+          <!-- BEGIN PROMO -->
+          <div class="col-md-6 shop-index-carousel">
+            <div class="content-slider">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="assets/pages/img/index-sliders/istockphoto-1338083617-612x612.jpg" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                  <div class="item">
+                    <img src="assets/pages/img/index-sliders/istockphoto-1338083603-612x612.jpg" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                  <div class="item">
+                    <img src="assets/pages/img/index-sliders/istockphoto-1338083637-612x612.jpg" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END PROMO -->
+        </div>        
+        <!-- END TWO PRODUCTS & PROMO -->
+      </div>
+    </div>

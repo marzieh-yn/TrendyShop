@@ -1,0 +1,242 @@
+﻿@page
+@using TrendyShops.Model
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@model TrendyShops.Pages.Customer.ShopItemModel
+@{
+        Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+        ViewData["Title"] = "Item Details";
+}
+
+@*@((ClaimsIdentity) User.Identity)*@
+
+ <ul class="breadcrumb">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a href="">Store</a></li>
+            <li class="active">@Html.DisplayFor(model => model.Product.Name)</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+           <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-4">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+               
+                @foreach (var item in Model.Category) {
+                     @if (item.Status == true)
+                     {
+                        <li class="list-group-item clearfix dropdown">
+                            <a href="shop-product-list.html">
+                                <i class="fa fa-angle-right"></i>
+                                    @Html.DisplayFor(modelItem => item.Name)                  
+                            </a>
+                             @foreach (var items in Model.Sub_Category) {
+                                 @if (items.Status == true && items.CategoryId == item.Id)
+                                 {
+                             <ul class="dropdown-menu">                 
+                                      <li><a asp-page="/Customer/ProductList" asp-route-id="@items.Id"><i class="fa fa-angle-right"></i>  @Html.DisplayFor(modelItem => items.Name)       </a></li>
+                              </ul>
+                                 }
+                             }
+                         </li>
+                     }
+                 }
+                </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7">
+            <div class="product-page">
+              <div class="row">
+                <form method="post">
+                     <input asp-for="ShoppingCart.ProductId" hidden />
+                <input asp-for="ShoppingCart.ApplicationUserId" hidden />
+                 <div class="form-group" hidden>
+                             <label asp-for="ShoppingCart.Created_Date" class="control-label" hidden>Created_Date</label>
+                            <input asp-for="ShoppingCart.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+                        </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="product-main-image">
+                    <img src=" @Html.DisplayFor(model => model.Product.Image)" alt="Cool green dress with red bell" class="img-responsive" >
+                  </div>
+                  <div class="product-other-images">
+                  
+                     @foreach (var stock in Model.ProductImages.Where(x=>x.ProductId==Model.Product.Id)){
+                        <a href="@stock.Image" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="@stock.Image"></a>
+                      }
+                              
+                  </div>
+                </div>
+               
+                <div class="col-md-6 col-sm-6">
+                  <h1> @Html.DisplayFor(model => model.Product.Name)</h1>
+                  <div class="price-availability-block clearfix">
+                    <div class="price">
+                      <strong><span>$</span> @Html.DisplayFor(model => model.Product.CurrnetPrice)</strong>
+                      <em>$<span> @Html.DisplayFor(model => model.Product.LastPrice)</span></em>
+                    </div>
+                    <div class="availability">
+
+                      Availability:
+                      @if(@Model.Product.Availability == true){
+                                <strong>In Stock</strong>
+                            }
+                           @if(@Model.Product.Availability == false){
+                                   <strong>Not Available</strong>
+                           }
+                            
+                    </div>
+                  </div>
+                  <div class="description">
+                    @Html.Raw(Model.Product.Short_description)
+                  </div>
+                  <div class="product-page-options">
+                    <div class="pull-left">
+                      <label  asp-for="ShoppingCart.ProductSizesId" class="control-label">Size:</label>
+                      
+                       <select class ="form-control  input-sm" asp-items="ViewBag.ProductSizess" asp-for="ShoppingCart.ProductSizesId">
+                    <option disabled selected>-Select Size</option>
+                        </select>
+                      
+                    </div>
+                    <div class="pull-left">
+                      <label  asp-for="ShoppingCart.ProductColorsId" class="control-label">Color:</label>
+                       <select class ="form-control  input-sm" asp-items="ViewBag.ProductColors" asp-for="ShoppingCart.ProductColorsId" >
+                    <option  disabled selected>-Select Color</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="product-page-cart">
+                    <div class="product-quantity">
+                        <input id="product-quantity"asp-for="ShoppingCart.Count" type="text" value="1" readonly class="form-control input-sm">
+                    </div>
+                    <button class="btn btn-primary" asp-route-id="@Model.Product.Id" type="submit" asp-page-handler="AddToCart">Add to cart</button>
+                  </div>
+                  </form>
+                  <div class="review">
+                    @*<input type="range" value="4" step="0.25" id="backing4">*@
+                   @* <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                    </div>*@
+                    @{
+                   var results = Model.ProductReviewss.Where(x => x.ProductId == Model.Product.Id &&  x.Status == true).Count();
+                    }
+                    <a href="#Reviews">@results reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#reviews">Write a review</a>
+                  </div>
+                 @* <ul class="social-icons">
+                    <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
+                    <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
+                    <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
+                    <li><a class="evernote" data-original-title="evernote" href="javascript:;"></a></li>
+                    <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a></li>
+                  </ul>*@
+                </div>
+
+                <div class="product-page-content">
+                  <ul id="myTab" class="nav nav-tabs">
+                    <li><a href="#Description" data-toggle="tab">Description</a></li>
+@*                    <li><a href="#Information" data-toggle="tab">Information</a></li>*@
+                    @if(Model.ProductReviewss.Where(x=>x.ProductId==Model.Product.Id) != null){
+                            var result = Model.ProductReviewss.Where(x => x.ProductId == Model.Product.Id  && x.Status == true).Count();
+                            <li class="active"><a href="#Reviews" data-toggle="tab">Reviews (@result)</a></li>
+                    }
+                    else{
+                      <li class="active"><a href="#Reviews" data-toggle="tab">Reviews (0)</a></li>
+
+                    }
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade" id="Description">
+                    @Html.Raw(Model.Product.Long_description)
+                    </div>
+
+                    <div class="tab-pane fade in active" id="Reviews">
+                      <!--<p>There are no reviews for this product.</p>-->
+
+                      @foreach (var review in Model.ProductReviewss.Where(x=>x.ProductId==Model.Product.Id)) {
+                                @if (review.Status == true)
+                                {
+                                    <div class="review-item clearfix">
+                                        <div class="review-item-submitted">
+                                            <strong>@review.Name</strong>
+                                            <em>@review.Created_Date</em>
+                                            <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                        </div>                                              
+                                        <div class="review-item-content">
+                                            <p>@review.ReviewDescription</p>
+                                        </div>
+                                    </div>
+                                }
+                       }
+
+                      <!-- BEGIN FORM-->
+                      <form method="post" class="reviews-form" id="reviews">
+                        <h2>Write a review</h2>
+                        <input asp-for="ProductReviews.UserId" hidden />
+                         <div class="form-group" hidden>
+                             <label asp-for="ProductReviews.Created_Date" class="control-label" hidden>Created_Date</label>
+                            <input asp-for="ProductReviews.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                         <input type="hidden" asp-route-id="@Model.Product.Id" value="@Model.Product.Id" asp-for="ProductReviews.ProductId" />
+
+                        <div class="form-group">
+                          <label asp-for="ProductReviews.Name" for="name">Name <span class="require">*</span></label>
+                          <input asp-for="ProductReviews.Name" type="text" class="form-control" id="name">
+                        </div>
+                        
+                        <div class="form-group">
+                          <label asp-for="ProductReviews.ReviewDescription" for="review">Review <span class="require">*</span></label>
+                          <textarea asp-for="ProductReviews.ReviewDescription" class="form-control" rows="8" id="review"></textarea>
+                        </div>
+                        
+                        <div class="padding-top-20">                  
+                          <button asp-route-id="@Model.Product.Id" type="submit" class="btn btn-primary"  asp-page-handler="Review">Send</button>
+                        </div>
+                      </form>
+                      <!-- END FORM--> 
+                    </div>
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <div class="row margin-bottom-40">
+          <div class="col-md-12 col-sm-12">
+            <h2>Most popular products</h2>
+            <div class="owl-carousel owl-carousel4">
+              @foreach (var items in Model.ProTypes) {
+                         @if (items.Status == true && items.ThreeItems == true)
+                {
+                 <div>
+                 <div class="product-item">
+                     <div class="pi-img-wrapper">               
+                    <img src="@items.Product.Image" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a href="@items.Product.Image" class="btn btn-default fancybox-button">Zoom</a>
+                      <a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id"  class="btn btn-default fancybox-fast-view">View</a>
+                    </div>
+                  </div>
+                  <h3><a asp-page="Customer/ShopItem" asp-route-id="@items.Product.Id" >@items.Product.Name</a></h3>
+                  <div class="pi-price">$@items.Product.CurrnetPrice</div>
+                  @*<a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>*@
+                </div>
+                 </div>
+                 
+                }
+                }
+            </div>
+          </div>
+        </div>
+        <!-- END SIMILAR PRODUCTS -->
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,196 @@
+/* _content/TrendyShops/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-joa78b2b69] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-joa78b2b69] {
+  color: #0077cc;
+}
+
+.btn-primary[b-joa78b2b69] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-joa78b2b69], .nav-pills .show > .nav-link[b-joa78b2b69] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-joa78b2b69] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-joa78b2b69] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-joa78b2b69] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-joa78b2b69] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-joa78b2b69] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/TrendyShops/Pages/Shared/_Layout2.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-fi5tm698d6] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-fi5tm698d6] {
+  color: #0077cc;
+}
+
+.btn-primary[b-fi5tm698d6] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-fi5tm698d6], .nav-pills .show > .nav-link[b-fi5tm698d6] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-fi5tm698d6] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-fi5tm698d6] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-fi5tm698d6] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-fi5tm698d6] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-fi5tm698d6] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/TrendyShops/Pages/Shared/_LayoutShopList.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-fwr0bbcgzz] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-fwr0bbcgzz] {
+  color: #0077cc;
+}
+
+.btn-primary[b-fwr0bbcgzz] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-fwr0bbcgzz], .nav-pills .show > .nav-link[b-fwr0bbcgzz] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-fwr0bbcgzz] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-fwr0bbcgzz] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-fwr0bbcgzz] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-fwr0bbcgzz] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-fwr0bbcgzz] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/TrendyShops/Pages/Shared/_LayoutUser.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-0vkeq72vr9] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-0vkeq72vr9] {
+  color: #0077cc;
+}
+
+.btn-primary[b-0vkeq72vr9] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-0vkeq72vr9], .nav-pills .show > .nav-link[b-0vkeq72vr9] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-0vkeq72vr9] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-0vkeq72vr9] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-0vkeq72vr9] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-0vkeq72vr9] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-0vkeq72vr9] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

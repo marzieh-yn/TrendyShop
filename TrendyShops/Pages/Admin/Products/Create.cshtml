@@ -1,0 +1,94 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Create</h2>
+
+
+<hr />
+<div class="row" style="margin-left:15%;">
+    <div class="col-md-8">
+        <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Product</h3>
+              </div>
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Product.Short_description" class="control-label"></label>
+                <textarea asp-for="Product.Short_description" class="form-control" id="summernote"></textarea>
+                <span asp-validation-for="Product.Short_description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Product.Long_description" class="control-label"></label>
+                <textarea asp-for="Product.Long_description" class="form-control" id="summernote2"></textarea>
+                <span asp-validation-for="Product.Long_description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.LastPrice" class="control-label"></label>
+                <input asp-for="Product.LastPrice" class="form-control" type="text"/>
+                <span asp-validation-for="Product.LastPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CurrnetPrice" class="control-label"></label>
+                <input asp-for="Product.CurrnetPrice" class="form-control" type="text"/>
+                <span asp-validation-for="Product.CurrnetPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Image" class="control-label"></label>
+                <input asp-for="Product.Image" class="form-control" type="file" />
+                <span asp-validation-for="Product.Image" class="text-danger"></span>
+            </div>
+            
+          
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Product.Availability" /> @Html.DisplayNameFor(model => model.Product.Availability)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Product.Status" /> @Html.DisplayNameFor(model => model.Product.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" hidden>
+                    <label asp-for="Product.Created_Date" class="control-label" hidden>Created_Date</label>
+                  <input asp-for="Product.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+                </div>
+            @*<div class="form-group">
+                <label asp-for="Product.Created_Date" class="control-label"></label>
+                <input asp-for="Product.Created_Date" class="form-control" />
+                <span asp-validation-for="Product.Created_Date" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+     
+}

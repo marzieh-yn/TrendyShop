@@ -1,0 +1,94 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model TrendyShops.Pages.ContactUsModel
+@{
+        Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+    ViewData["Title"] = "Contact Us";
+}
+<ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Pages</a></li>
+            <li class="active">Contact</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-3">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="list-group-item clearfix"><a asp-page="/Customer/UserAccount/Index"><i class="fa fa-angle-right"></i> My account</a></li>
+                <li class="list-group-item clearfix"><a asp-page="/Customer/UserAddress/Index"><i class="fa fa-angle-right"></i> Address book</a></li>
+            }
+            else
+            {
+                <li class="list-group-item clearfix"><a asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-angle-right"></i> Login/Register</a></li>
+                <li class="list-group-item clearfix"><a asp-page="/Customer/UserAccount/Index"><i class="fa fa-angle-right"></i> My account</a></li>
+                <li class="list-group-item clearfix"><a asp-page="/Customer/UserAddress/Index"><i class="fa fa-angle-right"></i> Address book</a></li>
+           
+            }
+        </ul>
+
+            <h2>Our Contacts</h2>
+            <address>
+              This is Demo Website<br>
+              <abbr title="Phone">P:</abbr> 2368884656<br>
+            </address>
+            <address>
+              <strong>Email</strong><br>
+              <a href="mailto:marzie.yahyanezhad@gmail.com">marzie.yahyanezhad@gmail.com</a><br>
+            </address>
+            
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-9">
+            <h1>Contact</h1>
+            <div class="content-page">
+              <!-- BEGIN FORM-->
+              <form method="post" class="default-form" role="form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                 <div class="form-group" hidden>
+                    <label asp-for="ContactUs.Created_Date" class="control-label" hidden>Created_Date</label>
+                  <input asp-for="ContactUs.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactUs.Name" class="control-label">Name</label>
+                  <input asp-for="ContactUs.Name" type="text" class="form-control" id="Name">
+                  <span asp-validation-for="ContactUs.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactUs.Email" class="control-label">Email</label>
+                  <input asp-for="ContactUs.Email" type="text" class="form-control" id="Email">
+                  <span asp-validation-for="ContactUs.Email" class="text-danger"></span>
+                  
+                </div>
+                <div class="form-group">
+                     <label asp-for="ContactUs.Phone_number" class="control-label">Phone Number</label>
+                  <input asp-for="ContactUs.Phone_number" type="text" class="form-control" id="Phone_number">
+                  <span asp-validation-for="ContactUs.Phone_number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                     <label asp-for="ContactUs.Message" class="control-label">Message</label>
+                  <textarea asp-for="ContactUs.Message" class="form-control" rows="8" id="Message"></textarea>
+                  <span asp-validation-for="ContactUs.Message" class="text-danger"></span>
+                
+                </div>
+                <div class="padding-top-20">                  
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              <!-- END FORM-->          
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+                  @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

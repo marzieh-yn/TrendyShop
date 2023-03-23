@@ -1,0 +1,62 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Products.ProductImages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>ProductImages</h4>
+<hr />
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+           
+            <div class="border p-3 mt-4">
+                 
+                <div class="row pb-2">
+                    <div class="col-9">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductImages.Id" />
+            <div class="form-group">
+                <label asp-for="ProductImages.ProductId" class="control-label"></label>
+                <select asp-for="ProductImages.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProductImages.ProductId" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                            <label asp-for="ProductImages.Image" class="control-label"></label>
+                            <input asp-for="ProductImages.Image" class="form-control" type="file"/>
+                            <span asp-validation-for="ProductImages.Image" class="text-danger"></span>
+                        </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProductImages.Status" /> @Html.DisplayNameFor(model => model.ProductImages.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductImages.Created_Date" class="control-label"></label>
+                <input asp-for="ProductImages.Created_Date" class="form-control" />
+                <span asp-validation-for="ProductImages.Created_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+                </div>
+                 <div class="col-3"><img src="@Model.ProductImages.Image" style="    width: -webkit-fill-available;"/>
+                    </div>
+                </div>
+             
+            </div>
+        </form>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

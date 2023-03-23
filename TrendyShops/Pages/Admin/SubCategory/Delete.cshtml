@@ -1,0 +1,60 @@
+﻿@page
+@model TrendyShops.Pages.Admin.SubCategory.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+   <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>@Html.DisplayNameFor(model => model.Sub_Category.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Sub_Category.Status)</th>
+                     <th>@Html.DisplayNameFor(model => model.Sub_Category.Category)</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                      
+                        <tr>
+                            <td>
+                            @Html.DisplayFor(model => model.Sub_Category.Id)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(model => model.Sub_Category.Name)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(model => model.Sub_Category.Status)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(model => model.Sub_Category.Category.Name)
+                            </td>                            
+                        </tr>
+                        
+                  
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                      <th>#</th>
+                    <th>@Html.DisplayNameFor(model => model.Sub_Category.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Sub_Category.Status)</th>
+                     <th>@Html.DisplayNameFor(model => model.Sub_Category.Category)</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+
+  <div>  
+    <form method="post">
+        <input type="hidden" asp-for="Sub_Category.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

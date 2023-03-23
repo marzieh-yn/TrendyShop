@@ -1,0 +1,54 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ProductReviews.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ProductReviews</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Name)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.ReviewDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.ReviewDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductReviews.Created_Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductReviews.Created_Date)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ProductReviews.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+﻿@page
+@model TrendyShops.Pages.Admin.Products.ProductImages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>ProductImages</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+
+        <form method="post" enctype="multipart/form-data">
+   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductImages.ProductId" class="control-label"></label>
+                <select asp-for="ProductImages.ProductId" class ="form-control" asp-items="ViewBag.ProductId">
+                                        <option disabled selected>-Select Product</option>
+
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="ProductImages.Image" class="control-label"></label>
+                <input asp-for="ProductImages.Image" class="form-control" type="file"/>
+                <span asp-validation-for="ProductImages.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProductImages.Status" /> @Html.DisplayNameFor(model => model.ProductImages.Status)
+                    </label>
+                </div>
+            </div>
+             <div class="form-group" hidden>
+                    <label asp-for="ProductImages.Created_Date" class="control-label" hidden>Created_Date</label>
+                  <input asp-for="ProductImages.Created_Date" type="text" class="form-control" id="Created_Date" hidden value="@DateTime.Now.ToString()">
+                </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

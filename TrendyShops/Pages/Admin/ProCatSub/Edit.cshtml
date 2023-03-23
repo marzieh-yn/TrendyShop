@@ -1,0 +1,56 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ProCatSub.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>ProCatSub</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProCatSub.Id" />
+            <div class="form-group">
+                <label asp-for="ProCatSub.ProductId" class="control-label"></label>
+                <select asp-for="ProCatSub.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProCatSub.ProductId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">           
+                    <label asp-for="ProCatSub.Sub_CategoryId" class="control-label"> SubCategory</label>
+                <select asp-for="ProCatSub.Sub_CategoryId" class ="form-control" id="Sub_CategoryId">
+                    <option selected>Open this select menu</option>
+                    @foreach(var item in Model.Sub_Category)
+                { 
+                    <option value="@item.Id"> @item.Category.Name -> @item.Name</option>
+    
+                }
+                </select>                                         
+                </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProCatSub.Status" /> @Html.DisplayNameFor(model => model.ProCatSub.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div> 
+
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

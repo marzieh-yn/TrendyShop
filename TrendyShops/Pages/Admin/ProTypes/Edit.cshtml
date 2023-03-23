@@ -1,0 +1,64 @@
+﻿@page
+@model TrendyShops.Pages.Admin.ProTypes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Product Types</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProTypes.Id" />
+            <div class="form-group">
+                <label asp-for="ProTypes.ProductId" class="control-label"></label>
+                <select asp-for="ProTypes.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProTypes.ProductId" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProTypes.NewArrival" /> @Html.DisplayNameFor(model => model.ProTypes.NewArrival)
+                    </label>
+                 </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProTypes.ThreeItems" /> @Html.DisplayNameFor(model => model.ProTypes.ThreeItems)
+                    </label>
+                 </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProTypes.BestSeller" /> @Html.DisplayNameFor(model => model.ProTypes.BestSeller)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ProTypes.Status" /> @Html.DisplayNameFor(model => model.ProTypes.Status)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

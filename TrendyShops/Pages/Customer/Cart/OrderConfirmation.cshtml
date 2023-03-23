@@ -1,0 +1,27 @@
+﻿@page
+@model TrendyShops.Pages.Customer.Cart.OrderConfirmationModel
+
+@{
+    Layout = "~/Pages/Shared/_LayoutShopList.cshtml";
+    ViewData["Title"] = "Order Confirmation";
+}
+<ul class="breadcrumb">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a>Cart</a></li>
+            <li class="active">Order Confirmation</li>
+        </ul>
+<div class="container row">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+        Your Order Number is : @Model.OrderId <br /><br />
+        <img src="~/images/lawn_leaf.jpg" width="65%" />
+    </div>
+    <div class="col-12 text-center" style="color:maroon">
+        <br />
+        Your order has been placed successfully! <br />
+        Please make sure to arrive on time for your delivery!
+        <br/>
+    </div>
+    <br/><br/>
+</div> 
+

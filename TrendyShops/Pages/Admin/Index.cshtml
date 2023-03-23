@@ -1,0 +1,96 @@
+﻿@page
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using TrendyShops.Utility
+@using TrendyShops.Model
+@model TrendyShops.Pages.Admin.IndexModel
+@{
+     Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+    <div class="container-fluid">
+      
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <div class="col-md-8">
+            <!-- TABLE: LATEST ORDERS -->
+            <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Latest Orders</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Item</th>
+                      <th>Status</th>
+                   
+                    </tr>
+                    </thead>
+                    <tbody>
+                         @foreach (var item in Model.OrderDetail) {
+                            <tr>
+                              <td><a asp-page="/Admin/Orders/ManageOrders/DetailsOrder" asp-route-id="@item.OrderId">@Html.DisplayFor(modelItem => item.OrderId)</a></td>
+                              <td> @Html.DisplayFor(modelItem => item.Product.Name)</td>
+                              <td>
+                                  @if (item.OrderHeader.Status == "Completed")
+                                  {
+                                      <span class="badge badge-success">@Html.DisplayFor(modelItem => item.OrderHeader.Status)</span>
+                                  }
+                                            @if(item.OrderHeader.Status == "Refunded")
+                                            {
+                                                <span class="badge badge-warning">@Html.DisplayFor(modelItem => item.OrderHeader.Status)</span>
+                                            }
+                                                @if(item.OrderHeader.Status == "Cancelled")
+                                                {
+                                                    <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.OrderHeader.Status)</span>
+                                              }
+                                                      @if(item.OrderHeader.Status == "Pending_Payment")
+                                                        {
+                                                            <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.OrderHeader.Status)</span>
+                                                        }
+                                                             @if(item.OrderHeader.Status == "Submitted_PaymentApproved")
+                                                                  {
+                                                                  <span class="badge badge-success">@Html.DisplayFor(modelItem => item.OrderHeader.Status)</span>
+                                                                     }
+                              </td>
+                             
+                            </tr>
+                            }
+
+                   
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                
+                <a asp-page="/Admin/Orders/Index" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+
+        </div>
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+
+
